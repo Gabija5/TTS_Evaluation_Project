@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Player Interface</title>
+  <style>
+    /* Adapted from registration form style */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ADD8E6;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      width: 90%;
+      padding: 30px;
+      background-color: #03dbf9;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      position: relative;
+      box-sizing: border-box;
+      color: #011;
+    }
+    
+    .header {
+      border: 2px solid #ff0;
+      border-radius: 10px;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      display: inline-block;
+      background-color: transparent;
+    }
+    
+    .header h1 {
+      margin: 0;
+      color: #ff0;
+      font-size: 24px;
+    }
+    
+    /* Audio interface-specific styles */
+    .description {
+      border: 2px solid #ff0;
+      border-radius: 10px;
+      padding: 10px;
+      width: 400px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #011;
+    }
+    
+    .audio-item {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .audio-player {
+      display: flex;
+      align-items: center;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      padding: 10px;
+      width: 350px;
+    }
+    
+    .play-button {
+      background-color: transparent;
+      color: #0ff;
+      border: 2px solid #0ff;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    
+    .waveform {
+      height: 30px;
+      flex-grow: 1;
+      background-color: #111;
+      position: relative;
+    }
+    
+    .waveform svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .volume-control {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+    
+    .volume-level {
+      display: flex;
+      align-items: center;
+    }
+    
+    .volume-option {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #011;
+      border-radius: 50%;
+      margin: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .volume-option.selected {
+      background-color: #011;
+    }
+    
+    .volume-option-label {
+      color: #011;
+      margin-right: 10px;
+    }
+    
+    .volume-line {
+      height: 2px;
+      width: 30px;
+      background-color: #011;
+      margin: 0 2px;
+    }
+    
+    .audio-title {
+      color: #011;
+      margin-right: 10px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Pronunciation Accuracy</h1>
+    </div>
+    <p>Evaluate how clearly ans correcly words were pornounced in the Text-To-Speech output.</p>
+    
+    <div class="description">
+        Low: 3 or more words are mispronouced or difficult to understand. <br>
+        Medium: 1-2 words are mispronounced or unclear <br>
+        High: All words are pronounced clearly and correctly
+    </div>
+    
+    <div class="audio-item">
+      <div class="audio-title">Audio no. 1</div>
+      <audio controls>
+        <source src="audio_2.wav" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+      <div class="volume-control">
+        <div class="volume-option-label">Low</div>
+        <div class="volume-option selected" onclick="setVolume(0, 'low')">
+          <div class="volume-dot"></div>
+        </div>
+        <div class="volume-line"></div>
+        <div class="volume-option-label">Medium</div>
+        <div class="volume-option" onclick="setVolume(0, 'medium')">
+          <div class="volume-dot"></div>
+        </div>
+        <div class="volume-line"></div>
+        <div class="volume-option-label">High</div>
+        <div class="volume-option" onclick="setVolume(0, 'high')">
+          <div class="volume-dot"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="audio-item">
+      <div class="audio-title">Audio no. 2</div>
+      <audio controls>
+        <source src="params_changed.wav" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+      <div class="volume-control">
+        <div class="volume-option-label">Low</div>
+        <div class="volume-option" onclick="setVolume(1, 'low')">
+          <div class="volume-dot"></div>
+        </div>
+        <div class="volume-line"></div>
+        <div class="volume-option-label">Medium</div>
+        <div class="volume-option selected" onclick="setVolume(1, 'medium')">
+          <div class="volume-dot"></div>
+        </div>
+        <div class="volume-line"></div>
+        <div class="volume-option-label">High</div>
+        <div class="volume-option" onclick="setVolume(1, 'high')">
+          <div class="volume-dot"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="audio-item">
+      <div class="audio-title">Audio no. 3</div>
+      <audio controls>
+        <source src="params_changed.wav" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+      <div class="volume-control">
+        <div class="volume-option-label">Low</div>
+        <div class="volume-option" onclick="setVolume(2, 'low')">
+          <div class="volume-dot"></div>
+        </div>
+        <div class="volume-line"></div>
+        <div class="volume-option-label">Medium</div>
+        <div class="volume-option" onclick="setVolume(2, 'medium')">
+          <div class="volume-dot"></div>
+        </div>
+        <div class="volume-line"></div>
+        <div class="volume-option-label">High</div>
+        <div class="volume-option selected" onclick="setVolume(2, 'high')">
+          <div class="volume-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const audioPlayers = [
+      { playing: false, volume: 'low' },
+      { playing: false, volume: 'medium' },
+      { playing: false, volume: 'high' }
+    ];
+    
+    function togglePlay(index) {
+      const player = audioPlayers[index];
+      player.playing = !player.playing;
+      
+      const playButton = document.querySelectorAll('.play-button')[index];
+      if (player.playing) {
+        playButton.innerHTML = '❚❚';
+        console.log(`Playing audio ${index+1} at volume ${player.volume}`);
+      } else {
+        playButton.innerHTML = '▶';
+        console.log(`Paused audio ${index+1}`);
+      }
+    }
+    
+    function setVolume(index, level) {
+      const player = audioPlayers[index];
+      player.volume = level;
+      
+      const volumeOptions = document.querySelectorAll('.audio-item')[index].querySelectorAll('.volume-option');
+      volumeOptions.forEach(option => option.classList.remove('selected'));
+      
+      let volumeIndex;
+      switch(level) {
+        case 'low': volumeIndex = 0; break;
+        case 'medium': volumeIndex = 1; break;
+        case 'high': volumeIndex = 2; break;
+      }
+      
+      volumeOptions[volumeIndex].classList.add('selected');
+      console.log(`Set audio ${index+1} volume to ${level}`);
+    }
+    
+    // Generate more realistic waveforms (if waveform SVGs are present)
+    document.querySelectorAll('.waveform svg').forEach((svg, index) => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      let d = 'M0,15 ';
+      for (let i = 0; i < 100; i++) {
+        const height = Math.random() * 20 + 5;
+        d += `L${i},${height} `;
+      }
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', '#0ff');
+      path.setAttribute('stroke-width', '1');
+      while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+      }
+      svg.appendChild(path);
+    });
+  </script>
+  
+  <div class="button">
+    <button onclick="location.href='criteria_3.html'">
+      Next Criteria
+    </button>
+  </div>
+</body>
+</html>

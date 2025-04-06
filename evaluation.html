@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .audio-sample {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 50%;
+        }
+        .rating {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="landing.html">Home</a> |
+        <a href="instructions.html">Instructions</a> |
+        <a href="evaluation.html">Evaluate</a>
+    </div>
+    <h1>Audio Evaluation</h1>
+    
+    <div class="audio-sample" id="sample1">
+        <p>Tortoise TTS Sample</p>
+        <audio controls>
+            <source src="params_changed.wav" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="rating">
+            <label for="rating1">Rate this sample:</label>
+            <input type="range" id="rating1" min="1" max="5" step="1" value="3" onchange="updateRating(1)">
+            <span id="ratingValue1">3</span>
+        </div>
+    </div>
+    
+    <div class="audio-sample" id="sample2">
+        <p>F5 TTS Sample</p>
+        <audio controls>
+            <source src="audio_2.wav" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="rating">
+            <label for="rating2">Rate this sample:</label>
+            <input type="range" id="rating2" min="1" max="5" step="1" value="3" onchange="updateRating(2)">
+            <span id="ratingValue2">3</span>
+        </div>
+    </div>
+
+    <div class="audio-sample" id="sample2">
+        <p>Real Voice</p>
+        <audio controls>
+            <source src="audio" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="rating">
+            <label for="rating2">Rate this sample:</label>
+            <input type="range" id="rating2" min="1" max="5" step="1" value="3" onchange="updateRating(3)">
+            <span id="ratingValue2">3</span>
+        </div>
+    </div>
+
+
+    <div class="flex items-center space-x-8">
+        <!-- Low -->
+        <label class="flex flex-col items-center cursor-pointer">
+            <input type="radio" name="evaluation" value="low" class="hidden peer">
+            <div class="w-12 h-12 border-4 border-blue-500 rounded-full flex justify-center items-center peer-checked:border-green-400">
+                <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+            </div>
+            <span class="text-blue-400 mt-2">Low</span>
+        </label>
+
+        <!-- Medium -->
+        <label class="flex flex-col items-center cursor-pointer">
+            <input type="radio" name="evaluation" value="medium" class="hidden peer">
+            <div class="w-14 h-14 border-4 border-blue-500 rounded-full flex justify-center items-center peer-checked:border-green-400">
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+            </div>
+            <span class="text-blue-400 mt-2">Medium</span>
+        </label>
+
+        <!-- High -->
+        <label class="flex flex-col items-center cursor-pointer">
+            <input type="radio" name="evaluation" value="high" class="hidden peer">
+            <div class="w-12 h-12 border-4 border-blue-500 rounded-full flex justify-center items-center peer-checked:border-green-400">
+                <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+            </div>
+            <span class="text-blue-400 mt-2">High</span>
+        </label>
+    </div>
+
+    <script>
+        function updateRating(sampleId) {
+            let rating = document.getElementById('rating' + sampleId).value;
+            document.getElementById('ratingValue' + sampleId).innerText = rating;
+        }
+    </script>
+</body>
+</html>
